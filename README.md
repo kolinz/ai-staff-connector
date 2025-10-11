@@ -1,15 +1,7 @@
 # AI Staff Connector
 メタバースと現実世界を橋渡しするハイブリッド型AI職員 | AI staff agent bridging virtual and physical worlds via voice interaction
 
-## 🤖 AI-Assisted Development Notice
-> **⚠️ このプロジェクトは実験的なものです**
-> 
-> このコードベースの大部分は**生成AI** を使用して開発されました。以下の点にご注意ください：
-
 ## 📋 概要
-### できること
-
-
 ### 開発経緯
 大学内で、学生や教員が自然と集まっていた場所に常駐していた派遣契約の職員が退職して以降、真っ暗な場所になったので、AIアバターによるAI職員（仮称 デカネさん）を配置することで、学生や教員が集まる場所を再現できるか試むために開発。
 
@@ -50,6 +42,11 @@
 - Text To Speech <--下記から１つ
   - VOICEVOX（オンプレミス運用ならこれ一択）
   - IBM Watson Text To Speech
+
+## 🤖 AI-Assisted Development Notice
+> **⚠️ このプロジェクトは実験的なものです**
+> 
+> このプロジェクトは、**生成AI** を使用して開発されました。以下の点にご注意ください：
 
 ### 実験的プロジェクトとしての位置づけ
 
