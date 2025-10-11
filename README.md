@@ -1,4 +1,4 @@
-# ai-staff-connector
+# Ai Staff Connector
 メタバースと現実世界を橋渡しするハイブリッド型AI職員 | AI staff agent bridging virtual and physical worlds via voice interaction
 
 ## 🤖 AI-Assisted Development Notice
@@ -7,19 +7,47 @@
 > このコードベースの大部分は**生成AI** を使用して開発されました。以下の点にご注意ください：
 
 ## 📋 概要
-### 動作に必要なソフトウェア
-- Python（Python 3.12系で確認済み）
-- Ollama
-- Dify
-- OpenAI Whisper ローカルモデル
-- OpenAI API
-- IBM Watson Speech To Text
-- IBM Watson Text To Speech
-- IBM Granite 4
-- Node-RED
-- VoiceVox
-- Virtual Audio Cable
+### できること
 
+
+### 開発経緯
+大学内で、学生や教員が自然と集まっていた場所に常駐していた派遣契約の職員が退職して以降、真っ暗な場所になったので、AI職員を配置することで、学生や教員が集まる場所を再現できるか試むために開発。
+
+### 主要機能
+- メタバースまたは現実世界から得た音声での会話を、テキストに変換し、AIエージェント（Dify）から返答を得て、以下を実行する。
+  - 返答結果を、AIアバターが音声で読み上げる。
+  - Outgoing Webhoookで、別のシステムに転送する。
+- カメラの認識結果やセンサーなどの値をIncoming Webhookを用いて、AIエージェント（Dify）に渡し、返答を得て、以下を実行する。
+  - 返答結果を、AIアバターが音声で読み上げる
+  - Outgoing Webhoookで、別のシステムに転送する。
+- 一定時間、AIアバターを放置するとアイドル（待機状態）チャットを発動。
+  - 環境変数ファイル .env で決めた時間毎に、環境変数ファイル .env で決めた複数の文章を、ランダムで読み上げる。
+    - 標準の時間は1分。推奨は3～5分程度。
+- 指定キーワードを、AIアバターに音声で指示すると休眠状態に移行
+  - 環境変数ファイル .env で決めた時間、静かにしている。
+  - 環境変数ファイル .env で決めた文章を、10分置きに話す。休眠状態で静かにしつつ、時々存在していることを主張する。
+
+### 動作に必要なハードウェア
+- ディスプレイが利用できるPC(パソコン）または、サーバー
+  - ノートPC、ディスプレイ付きのデスクトップPC、ディスプレイ付きのサーバーということになります。
+  - Windows または、Mac
+    - Virtual Audio Cableと同等の機能を再現することができる人は、Liinux も可能
+
+### 動作に必要なソフトウェア
+#### 運用するPCまたはサーバーに導入する
+- Python（Python 3.12系で確認済み）
+- Virtual Audio Cable（非商用なら無料）
+- Node-RED
+#### 運用形態としてオンプレミスまたはパブリッククラウドのどちらかで用意する
+- AIエージェント <--必須
+  - Dify
+- Speech To Text <--下記から１つ
+  - OpenAI Whisper（別途インストール不要）（オンプレミス運用ならこれ一択）
+  - OpenAI API
+  - IBM Watson Speech To Text
+- Text To Speech <--下記から１つ
+  - VOICEVOX（オンプレミス運用ならこれ一択）
+  - IBM Watson Text To Speech
 
 ### 実験的プロジェクトとしての位置づけ
 
