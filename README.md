@@ -29,10 +29,13 @@
   - AIアバターの運用環境をメタバースとしているために、実現が簡単。メタバース内のキャンパス（校舎）や教室は、自分で用意してください。たとえばUnityの無料アセットを使えば作ることができます。
 
 ### 動作に必要なハードウェア
+#### 本ソフトウェアを動かす環境
 - ディスプレイが利用できるPC(パソコン）または、サーバー
-  - ノートPC、ディスプレイ付きのデスクトップPC、ディスプレイ付きのサーバーということになります。
+  - ノートPC、ディスプレイ付きのデスクトップPC、ディスプレイ付きのサーバーのいずれか１つを用意ということになります。
   - Windows または、Mac
     - Virtual Audio Cableと同等の機能を再現することができる人は、Liinux も可能
+#### 現実世界の建物内にAI職員を表示する
+- ノートPC、ディスプレイ付きのデスクトップPCのどちらかを用意してください。
 
 ### 動作に必要なソフトウェア
 #### 運用するPCまたはサーバーに導入する
@@ -53,6 +56,12 @@
 - Text To Speech(TTS) <--下記から１つ
   - VOICEVOX（オンプレミス運用ならこれ一択）
   - IBM Watson Text To Speech
+#### AI職員を配置する
+- メタバース内に建物を用意してください。
+  - 推奨のメタバースは下記です。
+    - Vket Cloud
+    - Roomiq（以前のNTT DOOR）
+    - Spatial 
 
 ## 🤖 AI-Assisted Development Notice
 > **⚠️ このプロジェクトは実験的なものです**
@@ -92,3 +101,6 @@
 - [Ollama](https://ollama.com/)
 - [LM Studio](https://lmstudio.ai/)
 - [IBM Granite 4](https://www.ibm.com/granite/docs/models/granite)
+- [Vket Cloud](https://cloud.vket.com/)
+- [Roomiq](https://roomiq.jp/)
+- [Spatial](https://www.spatial.io/)
