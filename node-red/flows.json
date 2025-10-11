@@ -1,0 +1,257 @@
+[
+    {
+        "id": "f2cbd24fdb903b96",
+        "type": "tab",
+        "label": "AI Avatar Incoming Webhook",
+        "disabled": false,
+        "info": "AIアバターと連動するIncoming Webhookのエンドポイント",
+        "env": []
+    },
+    {
+        "id": "b32e39a04c93e1aa",
+        "type": "tab",
+        "label": "AI Avatar outgoing-webhook",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "77640383d771d4f3",
+        "type": "inject",
+        "z": "f2cbd24fdb903b96",
+        "name": "質問",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "AWSと比べたときのIBM Cloudの優位性について",
+        "payloadType": "str",
+        "x": 110,
+        "y": 80,
+        "wires": [
+            [
+                "f9e56b18bd616ad9"
+            ]
+        ]
+    },
+    {
+        "id": "f9e56b18bd616ad9",
+        "type": "function",
+        "z": "f2cbd24fdb903b96",
+        "name": "送信文章のJSON化",
+        "func": "var input = msg.payload;\nmsg.payload ={\n    \"query\": input,\n    \"user_id\": \"NodeRED_Flow_01\"\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 80,
+        "wires": [
+            [
+                "9ccaad48501b680d"
+            ]
+        ]
+    },
+    {
+        "id": "4d0f30e3b2675af3",
+        "type": "http request",
+        "z": "f2cbd24fdb903b96",
+        "name": "Incoming Webhook",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:8080/api/incoming-webhook",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "8a9505bf51a7d4ef",
+                "45cf2417173ea081"
+            ]
+        ]
+    },
+    {
+        "id": "8a9505bf51a7d4ef",
+        "type": "debug",
+        "z": "f2cbd24fdb903b96",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "9ccaad48501b680d",
+        "type": "json",
+        "z": "f2cbd24fdb903b96",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": true,
+        "x": 110,
+        "y": 180,
+        "wires": [
+            [
+                "4d0f30e3b2675af3",
+                "372688709738a465"
+            ]
+        ]
+    },
+    {
+        "id": "45cf2417173ea081",
+        "type": "function",
+        "z": "f2cbd24fdb903b96",
+        "name": "Incoming Webhookのレスポンス",
+        "func": "// msg.payload が前のノードからのレスポンスオブジェクト全体だと仮定\nlet responseObj = msg.payload;\n\n// 1. msg.payloadが文字列であれば、まずJSONオブジェクトに変換\nif (typeof responseObj === 'string') {\n    try {\n        responseObj = JSON.parse(responseObj);\n    } catch (e) {\n        // パースに失敗した場合はエラーをログに出力して終了\n        node.error(\"ペイロードのJSONパースに失敗しました: \" + e.message);\n        return null;\n    }\n}\n\n// 2. \"agent_response\"の値を取り出す\n//    \"status\"は無視されます。\nlet unicodeString = responseObj.agent_response;\n\nif (!unicodeString) {\n    node.warn(\"agent_response キーが見つからないか、値が空でした。\");\n    return null; \n}\n\n// 3. Unicodeアンエスケープ処理\n\ntry {\n    // JSON.parse() に渡すために、文字列を二重引用符で囲む。\n    // 既存の二重引用符はパースエラーを防ぐためにエスケープする。\n    let escapedString = '\"' + unicodeString.replace(/\"/g, '\\\\\"') + '\"';\n    \n    // JSON.parse() が評価する際に、\\uXXXX 形式が通常の文字にアンエスケープされる\n    let unescapedText = JSON.parse(escapedString);\n    \n    // 処理後の文字列を msg.payload に設定\n    msg.payload = unescapedText;\n    \n} catch (e) {\n    node.error(\"Unicodeアンエスケープ中にエラーが発生しました: \" + e.message);\n    return null;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 190,
+        "y": 360,
+        "wires": [
+            [
+                "0e73dbc562862197"
+            ]
+        ]
+    },
+    {
+        "id": "0e73dbc562862197",
+        "type": "debug",
+        "z": "f2cbd24fdb903b96",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "372688709738a465",
+        "type": "debug",
+        "z": "f2cbd24fdb903b96",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "37fd9e79fa20087d",
+        "type": "comment",
+        "z": "f2cbd24fdb903b96",
+        "name": "Incoming Webhookのレスポンスを他の処理に使う",
+        "info": "",
+        "x": 510,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "8afae30aecae0bdc",
+        "type": "comment",
+        "z": "f2cbd24fdb903b96",
+        "name": "AIアバター内のDifyにテキストを送るIncoming Webhook",
+        "info": "",
+        "x": 530,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "1c7784785ea82841",
+        "type": "comment",
+        "z": "f2cbd24fdb903b96",
+        "name": "Incoming Webhook プロトタイプ",
+        "info": "このフローを使う前に、server.py を起動する",
+        "x": 170,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "e5d3f0b4a7ed7cfb",
+        "type": "http in",
+        "z": "b32e39a04c93e1aa",
+        "name": "",
+        "url": "/outgoing-webhook",
+        "method": "post",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 60,
+        "wires": [
+            [
+                "1671e1db61058239",
+                "4a0f10689c38b7fb"
+            ]
+        ]
+    },
+    {
+        "id": "1671e1db61058239",
+        "type": "debug",
+        "z": "b32e39a04c93e1aa",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "4a0f10689c38b7fb",
+        "type": "http response",
+        "z": "b32e39a04c93e1aa",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 440,
+        "y": 100,
+        "wires": []
+    }
+]
