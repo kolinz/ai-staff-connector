@@ -3,7 +3,9 @@
 
 ## 📋 概要
 ### 開発経緯
-大学内で、学生や教員が自然と集まっていた場所に常駐していた派遣契約の職員が退職して以降、真っ暗な場所になったので、AIアバターによるAI職員（仮称 デカネさん）を配置することで、学生や教員が集まる場所を再現できるか試むために開発。
+- 大学内で、学生や教員が自然と集まっていた場所に常駐していた派遣契約の職員が退職して以降、真っ暗な場所になったので、AIアバターによるAI職員（仮称 デカネさん）を配置することで、学生や教員が集まる場所を再現できるか試むために開発。
+- 前提として、なるべく無料で利用できるソフトウェアで構成する。
+  - ビジネスにしたい場合、一部のソフトウェアにはエンタープライズライセンスがあるものもあるが、このソフトウェア自体でお金を稼ぐのではなく、運用支援も含めたソリューションビジネスに向く。
 
 ### 動かし方
 [Wiki](https://github.com/kolinz/ai-staff-connector/wiki)をご覧ください。
@@ -40,11 +42,15 @@
 #### 運用形態としてオンプレミスまたはパブリッククラウドのどちらかで用意する
 - AIエージェント <--必須
   - Dify
-- Speech To Text <--下記から１つ
+    - LLM/SLM <-- Difyをオンプレミス環境やパブリッククラウドのIaaSで運用する場合は、LLM/SLM を自分で運用しないといけない
+      - Ollama または LM Stduio <-- LLM/SLMの運用にどちらかを使う
+      - おすすめのLLM/SLM
+        - IBM Granite 4
+- Speech To Text(STT) <--下記から１つ
   - Faster Whisper（別途インストール不要）（オンプレミス運用ならこれ一択）
   - OpenAI API
   - IBM Watson Speech To Text
-- Text To Speech <--下記から１つ
+- Text To Speech(TTS) <--下記から１つ
   - VOICEVOX（オンプレミス運用ならこれ一択）
   - IBM Watson Text To Speech
 
@@ -83,3 +89,6 @@
 - [OpenAI API](https://openai.com/ja-JP/index/openai-api/)
 - [IBM Watson Speech To Text公式ドキュメント](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-about&locale=ja)
 - [IBM Watson Text To Speech公式ドキュメント](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-about&locale=ja)
+- [Ollama](https://ollama.com/)
+- [LM Studio](https://lmstudio.ai/)
+- [IBM Granite 4](https://www.ibm.com/granite/docs/models/granite)
