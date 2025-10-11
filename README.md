@@ -41,7 +41,7 @@
 - AIエージェント <--必須
   - Dify
 - Speech To Text <--下記から１つ
-  - OpenAI Whisper（別途インストール不要）（オンプレミス運用ならこれ一択）
+  - Faster Whisper（別途インストール不要）（オンプレミス運用ならこれ一択）
   - OpenAI API
   - IBM Watson Speech To Text
 - Text To Speech <--下記から１つ
@@ -78,3 +78,8 @@
 
 - [Dify公式ドキュメント](https://docs.dify.ai/)
 - [Voicevox公式サイト](https://voicevox.hiroshiba.jp/)
+- [Node-RED](https://nodered.org/)
+- [Faster Whisper](https://github.com/SYSTRAN/faster-whisper)
+- [OpenAI API](https://openai.com/ja-JP/index/openai-api/)
+- [IBM Watson Speech To Text公式ドキュメント](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-about&locale=ja)
+- [IBM Watson Text To Speech公式ドキュメント](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-about&locale=ja)
