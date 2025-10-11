@@ -16,6 +16,7 @@
 - IBM Watson Speech To Text
 - IBM Watson Text To Speech
 - IBM Granite 4
+- Node-RED
 - VoiceVox
 - Virtual Audio Cable
 
