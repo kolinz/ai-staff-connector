@@ -48,7 +48,7 @@
 #### 運用するPCまたはサーバーに導入する
 - Python（Python 3.12系で確認済み）
 - Virtual Audio Cable（非商用なら無料）
-- Node-RED
+- Docker Desktop（Windows環境）/ OrbStack（Mac環境）
 #### 運用形態としてオンプレミスまたはパブリッククラウドのどちらかで用意する
 - AIエージェント <--必須
   - Dify
@@ -103,7 +103,9 @@
 
 - [Dify公式ドキュメント](https://docs.dify.ai/)
 - [Voicevox公式サイト](https://voicevox.hiroshiba.jp/)
-- [Node-RED](https://nodered.org/)
+- [Docker Desktop](https://www.docker.com/ja-jp/products/docker-desktop/)
+- [OrbStack](https://orbstack.dev/)
+- [Python](https://www.python.org/)
 - [Faster Whisper](https://github.com/SYSTRAN/faster-whisper)
 - [OpenAI API](https://openai.com/ja-JP/index/openai-api/)
 - [IBM Watson Speech To Text公式ドキュメント](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-about&locale=ja)
